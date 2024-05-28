@@ -30,5 +30,8 @@ func(c *Pool) Start(){
 					return
 
 		}
+		m := Message{Type: msgType, Body: string(msg)}
+		c.Pool.Broadcast <- m
+		fmt.Println("msg recived===>>>\n", m)
 	}
 }
