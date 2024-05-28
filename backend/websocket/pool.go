@@ -28,6 +28,8 @@ func(pool *Pool) Start(){
 			}
 			break
 		case client := <-pool.Unregister:
+			delete(pool.Clients,client)
+			fmt.Println("totle connection ppol:- ", len(pool.Clients))
 		case client := <-pool.Broadcast:
 		}
 	}
