@@ -11,4 +11,7 @@ let connect = (cb) => {
     console.log('message from socket', msg);
     cb(msg);
   };
+  socket.onclose = (event) => {
+    console.log('websocket connected closed', event);
+  };
 };
