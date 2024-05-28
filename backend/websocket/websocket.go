@@ -12,7 +12,6 @@ var upgrader = websocket.Upgrader{
 }
 
 func Upgrade(w http.ResposeWriter, r *http.Request){
-	upgrader.CheckOrigin = func (r *http.Request)  {
-		
-	}
+	upgrader.CheckOrigin = func (r *http.Request)bool{return true}
+	upgrader.Upgrade(w, r, nil)
 }
