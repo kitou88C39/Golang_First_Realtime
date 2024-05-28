@@ -13,3 +13,13 @@ func NewPool() *Pool{return &Pool{
 	Clients: make(map [*Client] bool),
 	Broadcast: make(chan Message),
 }}
+
+func(poll *Pool) Start(){
+	for {
+		select{
+		case client := <-poll.Register:
+		case client := <-poll.Unregister:
+		case client := <-poll.Broadcast:
+		}
+	}
+}
