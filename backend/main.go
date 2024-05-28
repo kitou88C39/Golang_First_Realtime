@@ -2,11 +2,16 @@ package main
 
 import (
 	customwebsocket "chatapplication/websocket"
+	"log"
 	"net/http"
 )
 
 func serverWs(pool *customwebsocket.Pool,w http.ResponseWriter, r *http.Request) {
-    customwebsocket.Upgrade(w,r)
+    conn, err := customwebsocket.Upgrade(w,r)
+    if err != nil {
+        log.Println(err)
+        return
+    }
 }
 
 func setupRoutes(){
@@ -14,7 +19,7 @@ func setupRoutes(){
     go pool.Start()
 
     http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-        serverWs(w, r, pool)
+        serverWs(pool, w, r)
     })
 }
 
