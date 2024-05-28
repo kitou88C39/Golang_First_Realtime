@@ -18,17 +18,17 @@ type Message struct {
     Body string `json:"body"`
 }
 
-func(c *Pool) Start(){
+func(c *Client) Read(){
 	defer func ()  {
 		c.Pool.Unregister <- c
 		c.Conn.Close()
 	}()
+
 	for {
 		msgType, msg, err := c.Conn.ReadMessage()
 		if err != nil {
 			fmt.Println(err)
 					return
-
 		}
 		m := Message{Type: msgType, Body: string(msg)}
 		c.Pool.Broadcast <- m
