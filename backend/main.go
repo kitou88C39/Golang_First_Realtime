@@ -12,11 +12,13 @@ func serverWs(pool *customwebsocket.Pool,w http.ResponseWriter, r *http.Request)
         log.Println(err)
         return
     }
-    
+
     client := &customwebsocket.Client{
         Conn: conn,
         Pool: pool,
     }
+    pool.Register <- client
+    client.Read()
 }
 
 func setupRoutes(){
