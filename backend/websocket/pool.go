@@ -1,15 +1,9 @@
 package customwebsocket
 
-import (
-	"sync"
-
-	"github.com/gorilla/websocket"
-)
-
 type pool struct{
-	Conn * websocket.Conn
-	Pool *Pool
-	mu sync.Mutex
+	Register chan *Client
+	Unregister chan *Client
+	Clients map [*Client] pool
 }
 
 type Message struct {
