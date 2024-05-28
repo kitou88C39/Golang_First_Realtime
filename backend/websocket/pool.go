@@ -16,18 +16,19 @@ func NewPool() *Pool{return &Pool{
 	Broadcast: make(chan Message),
 }}
 
-func(poll *Pool) Start(){
+func(pool *Pool) Start(){
 	for {
 		select{
-		case client := <-poll.Register:
-			pool.Clients[client]=true
-			fmt.Println("totle connection ppol:- ", len(poll.Clients))
-			for k, _ := range poll.Clients{
+		case client := <-pool.Register:
+			pool.Clients[client] = true
+			fmt.Println("totle connection ppol:- ", len(pool.Clients))
+			for k, _ := range pool.Clients{
 				fmt.Println(k)
 				client.Conn.WriteJSON(Message{Type: 1, Body: "New User Joined"})
 			}
-		case client := <-poll.Unregister:
-		case client := <-poll.Broadcast:
+			break
+		case client := <-pool.Unregister:
+		case client := <-pool.Broadcast:
 		}
 	}
 }
