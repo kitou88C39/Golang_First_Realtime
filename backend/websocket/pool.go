@@ -38,6 +38,7 @@ func(pool *Pool) Start(){
 			for k, _ := range pool.Clients {
 				if err := k.Conn.WriteJSON(msg); err != nil {
 					fmt.Println(err)
+					return
 				}
 			}
 		}
