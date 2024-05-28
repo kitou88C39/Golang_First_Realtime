@@ -21,16 +21,25 @@ func(pool *Pool) Start(){
 		select{
 		case client := <-pool.Register:
 			pool.Clients[client] = true
-			fmt.Println("totle connection ppol:- ", len(pool.Clients))
+			fmt.Println("total connection ppol:- ", len(pool.Clients))
 			for k, _ := range pool.Clients{
 				fmt.Println(k)
-				client.Conn.WriteJSON(Message{Type: 1, Body: "New User Joined"})
+				k.Conn.WriteJSON(Message{Type: 1, Body: "New User Joined"})
 			}
-			break
 		case client := <-pool.Unregister:
 			delete(pool.Clients,client)
-			fmt.Println("totle connection ppol:- ", len(pool.Clients))
-		case client := <-pool.Broadcast:
+			fmt.Println("total connection ppol:- ", len(pool.Clients))
+			for k, _ := range pool.Clients{
+				fmt.Println(k)
+				k.Conn.WriteJSON(Message{Type: 1, Body: "User Disconnected"})
+			}
+		case message := <-pool.Broadcast:
+			fmt.Println("broadcasting a message")
+			for k, _ := range pool.Clients {
+				if err := k.Conn.WriteJSON(message); err != nil {
+
+				}
+			}
 		}
 	}
 }
