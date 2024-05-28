@@ -18,3 +18,7 @@ let connect = (cb) => {
     console.log('websocket error', error);
   };
 };
+let sendMsg = (msg) => {
+  console.log('msg send:-', msg);
+  socket.send(msg);
+};
