@@ -14,4 +14,7 @@ let connect = (cb) => {
   socket.onclose = (event) => {
     console.log('websocket connected closed', event);
   };
+  socket.onerror = (error) => {
+    console.log('websocket error', error);
+  };
 };
