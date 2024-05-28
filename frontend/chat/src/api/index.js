@@ -22,3 +22,5 @@ let sendMsg = (msg) => {
   console.log('msg send:-', msg);
   socket.send(msg);
 };
+
+export { connect, sendMsg };
