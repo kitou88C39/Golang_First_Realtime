@@ -7,6 +7,7 @@ import (
 )
 
 func serverWs(pool *customwebsocket.Pool,w http.ResponseWriter, r *http.Request) {
+    log.Println("This is working")
     conn, err := customwebsocket.Upgrade(w,r)
     if err != nil {
         log.Println(err)
@@ -22,6 +23,7 @@ func serverWs(pool *customwebsocket.Pool,w http.ResponseWriter, r *http.Request)
 }
 
 func setupRoutes(){
+    log.Println("This is working")
     pool := customwebsocket.NewPool()
     go pool.Start()
 
