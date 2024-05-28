@@ -6,14 +6,15 @@ import (
 )
 
 func serverWs(pool *customwebsocket.Pool,w http.ResponseWriter, r *http.Request) {
-    // WebSocketの接続処理をここに書く
+    customwebsocket.Upgrade(w,r)
 }
 
 func setupRoutes(){
     pool := customwebsocket.NewPool()
     go pool.Start()
-    http.HandlerFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-        serverWs(pool, w, r)
+
+    http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
+        serverWs(w, r, pool)
     })
 }
 
