@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const ChatHistory = () => {
-  return <div>ChatHistory</div>;
+class ChatHistory extends Component {
+    render() {
+        return (
+          <div className='ChatInput'>
+            <input onKeyDown={this.props.send} placeholder='Enter a message...' />
+          </div>
+        );
 };
 
 export default ChatHistory;
