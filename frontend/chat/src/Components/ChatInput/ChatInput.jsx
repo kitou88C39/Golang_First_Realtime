@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const ChatInput = () => {
-  return <div>ChatInput</div>;
-};
-
-export default ChatInput;
+class ChatInput extends Component {
+  render() {
+    return (
+      <div className='ChatInput'>
+        <input onKeyDown={this.props.send} placeholder='Enter a message' />
+      </div>
+    );
+  }
+}
