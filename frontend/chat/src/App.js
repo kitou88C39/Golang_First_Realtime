@@ -1,13 +1,18 @@
-import logo from './logo.svg';
 import Header from './Components/Header';
 import ChatInput from './components/ChatInput';
-
 import './App.css';
+import React, { Component } from 'react';
 
-function App() {
+class App extends Component {
+  constructor(props){
+    this.state = {
+    chatHistory:[],
+    }
+  }
   return (
     <div className='App'>
       <Header />
+      <ChatInput send={this.send} />
     </div>
   );
 }
