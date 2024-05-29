@@ -4,7 +4,7 @@ import './Header.scss';
 const Header = () => {
   return (
     <div>
-      <h2>Go chat app</h2>
+      <h2>Go chat application in react</h2>
     </div>
   );
 };
